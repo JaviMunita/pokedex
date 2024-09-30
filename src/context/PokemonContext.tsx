@@ -13,8 +13,10 @@ const PokemonContext = createContext();
 const PokemonProvider = ({ children }) => {
   const [pokemonDetail, setPokemonDetail] = useState(null);
   const [showPokemonDetail, setShowPokemonDetail] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const showPokemon = async (pokemonInfo) => {
+    setIsLoading(true);
     const { data: description } = await axios.get(pokemonInfo.species.url);
     const { id, name, height, weight, stats, types, abilities } = pokemonInfo;
 
@@ -32,6 +34,9 @@ const PokemonProvider = ({ children }) => {
 
     setPokemonDetail(formattedPokemonDetail);
     setShowPokemonDetail(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
   };
 
   const closePokemonDetail = () => {
@@ -45,6 +50,7 @@ const PokemonProvider = ({ children }) => {
         showPokemon,
         closePokemonDetail,
         pokemonDetail,
+        isLoading,
       }}
     >
       {children}

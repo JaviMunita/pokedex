@@ -1,17 +1,17 @@
 import PokemonInfo from "./PokemonInfo";
 
-const Drawer = ({ pokemon }) => {
+const Drawer = ({ pokemon, isLoading }) => {
   return (
     <section className="hidden lg:block h-screen sticky top-0 mt-4">
       <article
-        className={`absolute bottom-0 h-[85%] w-full rounded-tl-3xl rounded-tr-3xl bg-white text-centertransition-all duration-500 ${
-          pokemon ? "left-0" : "left-[50vw]"
+        className={`absolute bottom-0 h-[85%] w-full z-20 rounded-tl-3xl rounded-tr-3xl bg-white text-centertransition-all duration-500 ${
+          pokemon && !isLoading ? "left-0" : "left-[50vw]"
         }`}
       >
         <PokemonInfo pokemon={pokemon} />
       </article>
       <article
-        className={`absolute bottom-0 h-[85%] w-full rounded-tl-3xl rounded-tr-3xl bg-white text-center grid place-content-center transition-all duration-500 ${
+        className={`absolute bottom-0 h-[85%] w-full z-20 rounded-tl-3xl rounded-tr-3xl bg-white text-center grid place-content-center transition-all duration-500 ${
           pokemon ? "left-[50vw]" : "left-0"
         }`}
       >
@@ -22,6 +22,10 @@ const Drawer = ({ pokemon }) => {
           Who's that pokémon?
         </span>
       </article>
+      {/* Loader */}
+      <div className="w-[60px] absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+        <img className="animate-spin" src="/pokeball-icon.png" alt="" />
+      </div>
     </section>
   );
 };
