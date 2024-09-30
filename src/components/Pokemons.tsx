@@ -16,7 +16,7 @@ function Pokemons() {
 
   useEffect(() => {
     axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=50")
+      .get("https://pokeapi.co/api/v2/pokemon?limit=898")
       .then(({ data }) => setAllPokemons(data.results))
       .catch((err) => console.log(err));
   }, []);

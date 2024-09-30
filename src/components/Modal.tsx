@@ -1,7 +1,6 @@
 import { IconX } from "@tabler/icons-react";
-import { colorByStat, typeColor } from "../constants/colors";
-import { pokemonType } from "../constants/detailStyle";
 import ModalInfo from "./ModalInfo";
+import { typeColor } from "../constants/colors";
 
 interface ModalProps {
   showModal: boolean;
@@ -12,9 +11,9 @@ interface ModalProps {
 const Modal = ({ showModal, onClose, pokemon }: ModalProps) => {
   return (
     <section
-      className={`fixed top-0 left-0 right-0 h-screen bg-red-500 transition-all duration-500 ${
-        showModal ? "visible opacity-100" : "invisible opacity-0"
-      }`}
+      className={`fixed top-0 left-0 right-0 h-screen transition-all duration-500 ${
+        typeColor[pokemon?.types[0]]
+      } ${showModal ? "visible opacity-100" : "invisible opacity-0"}`}
     >
       <button
         onClick={onClose}

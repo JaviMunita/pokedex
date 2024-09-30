@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import {
   formatAbilities,
   formatStats,
@@ -33,12 +33,6 @@ const PokemonProvider = ({ children }) => {
     setPokemonDetail(formattedPokemonDetail);
     setShowPokemonDetail(true);
   };
-
-  useEffect(() => {
-    if (pokemonDetail) {
-      console.log("Updated pokemonDetail:", pokemonDetail);
-    }
-  }, [pokemonDetail]);
 
   const closePokemonDetail = () => {
     setShowPokemonDetail(false);
