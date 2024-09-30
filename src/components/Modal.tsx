@@ -1,11 +1,15 @@
 import { IconX } from "@tabler/icons-react";
+import { colorByStat, typeColor } from "../constants/colors";
+import { pokemonType } from "../constants/detailStyle";
+import ModalInfo from "./ModalInfo";
 
 interface ModalProps {
   showModal: boolean;
   onClose: () => void;
+  pokemon: any;
 }
 
-const Modal = ({ showModal, onClose }: ModalProps) => {
+const Modal = ({ showModal, onClose, pokemon }: ModalProps) => {
   return (
     <section
       className={`fixed top-0 left-0 right-0 h-screen bg-red-500 transition-all duration-500 ${
@@ -23,7 +27,7 @@ const Modal = ({ showModal, onClose }: ModalProps) => {
           showModal ? "bottom-0" : "-bottom-full"
         }`}
       >
-        Pokemon
+        <ModalInfo pokemon={pokemon} />
       </article>
     </section>
   );

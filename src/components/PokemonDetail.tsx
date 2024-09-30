@@ -9,6 +9,7 @@ import { usePokemonInfo } from "../hooks/usePokemonInfo";
 
 interface PokemonDetail {
   pokemonURL: string;
+  onClick: any;
 }
 
 const PokemonDetail = ({ pokemonURL, onClick }: PokemonDetail) => {
@@ -25,7 +26,7 @@ const PokemonDetail = ({ pokemonURL, onClick }: PokemonDetail) => {
   return (
     <article
       className={`${pokemonCard} ${hoverEffectCard} group`}
-      onClick={onClick}
+      onClick={() => onClick(pokemonInfo)}
     >
       <header className="h-9">
         <img
