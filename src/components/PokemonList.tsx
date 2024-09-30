@@ -34,9 +34,9 @@ const PokemonList = ({ pokemons }: IPokemons) => {
       <ResponsivePagination
         className="flex gap-2 w-fit m-auto mt-5"
         pageItemClassName="bg-white p-2 font-semibold rounded-full shadow-lg w-[30px] aspect-square grid place-content-center hover:scale-110"
-        activeItemClassName="bg-red-400 text-white"
-        previousLabel={<IconChevronLeft stroke={3} />}
-        nextLabel={<IconChevronRight stroke={3} />}
+        activeItemClassName="bg-[#E6BC2F] text-white"
+        previousLabel={<IconChevronLeft stroke={4} color="#EE6B2F" />}
+        nextLabel={<IconChevronRight stroke={4} color="#EE6B2F" />}
         current={currentPage}
         total={pokemonsPerPage}
         onPageChange={setCurrentPage}

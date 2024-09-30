@@ -1,6 +1,6 @@
 import { colorByStat, typeColor } from "../constants/colors";
 
-const ModalInfo = ({ pokemon }) => {
+const PokemonInfo = ({ pokemon }) => {
   return (
     <>
       <header className="absolute left-1/2 -translate-x-1/2 -translate-y-[92%] scale-[180%]">
@@ -73,4 +73,4 @@ const ModalInfo = ({ pokemon }) => {
     </>
   );
 };
-export default ModalInfo;
+export default PokemonInfo;

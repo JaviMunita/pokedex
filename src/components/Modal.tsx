@@ -1,5 +1,5 @@
 import { IconX } from "@tabler/icons-react";
-import ModalInfo from "./ModalInfo";
+import PokemonInfo from "./PokemonInfo";
 import { typeColor } from "../constants/colors";
 
 interface ModalProps {
@@ -11,7 +11,7 @@ interface ModalProps {
 const Modal = ({ showModal, onClose, pokemon }: ModalProps) => {
   return (
     <section
-      className={`fixed top-0 left-0 right-0 h-screen transition-all duration-500 ${
+      className={`fixed lg:hidden top-0 left-0 right-0 h-screen transition-all duration-500 ${
         typeColor[pokemon?.types[0]]
       } ${showModal ? "visible opacity-100" : "invisible opacity-0"}`}
     >
@@ -26,7 +26,7 @@ const Modal = ({ showModal, onClose, pokemon }: ModalProps) => {
           showModal ? "bottom-0" : "-bottom-full"
         }`}
       >
-        <ModalInfo pokemon={pokemon} />
+        <PokemonInfo pokemon={pokemon} />
       </article>
     </section>
   );
