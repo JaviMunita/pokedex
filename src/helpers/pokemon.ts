@@ -28,6 +28,7 @@ const formatAbilities = (abilities: Ability[]) =>
   abilities.map((ability) => ability.ability.name);
 
 const getPokemonDescription = (pokemonSpecies: Species) =>
+  // @ts-ignore
   pokemonSpecies.flavor_text_entries[1].flavor_text;
 
 const getPokemonImage = (sprites: Sprites) => {
