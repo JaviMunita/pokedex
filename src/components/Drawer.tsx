@@ -1,7 +1,7 @@
-import { IPokemonDetail } from "../context/types";
+import PokemonInfo from "./PokemonInfo";
 
 interface IDrawer {
-  pokemon: IPokemonDetail | null;
+  pokemon: [];
   isLoading: boolean;
 }
 
@@ -12,7 +12,9 @@ const Drawer = ({ pokemon, isLoading }: IDrawer) => {
         className={`absolute bottom-0 h-[85%] w-full z-20 rounded-tl-3xl rounded-tr-3xl bg-white text-centertransition-all duration-500 ${
           pokemon && !isLoading ? "left-0" : "left-[50vw]"
         }`}
-      ></article>
+      >
+        <PokemonInfo pokemon={pokemon} />
+      </article>
       <article
         className={`absolute bottom-0 h-[85%] w-full z-20 rounded-tl-3xl rounded-tr-3xl bg-white text-center grid place-content-center transition-all duration-500 ${
           pokemon ? "left-[50vw]" : "left-0"

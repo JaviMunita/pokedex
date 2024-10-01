@@ -1,14 +1,16 @@
 import { colorByStat, typeColor } from "../constants/data";
-import { IPokemonDetail } from "../context/types";
 
 interface IPokemonInfo {
-  pokemon: IPokemonDetail;
+  pokemon: {
+    image: string;
+    description: string;
+    name: string;
+    abilities: [];
+    stats: [];
+  };
 }
 
 const PokemonInfo = ({ pokemon }: IPokemonInfo) => {
-  if (!pokemon) {
-    return <div>No pokémon selected</div>;
-  }
   return (
     <>
       <header className="absolute left-1/2 -translate-x-1/2 -translate-y-[92%] scale-[180%]">
