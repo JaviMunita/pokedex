@@ -1,6 +1,11 @@
 import PokemonInfo from "./PokemonInfo";
 
-const Drawer = ({ pokemon, isLoading }) => {
+interface IDrawer {
+  pokemon: [];
+  isLoading: boolean;
+}
+
+const Drawer = ({ pokemon, isLoading }: IDrawer) => {
   return (
     <section className="hidden lg:block h-screen sticky top-0 mt-4">
       <article
