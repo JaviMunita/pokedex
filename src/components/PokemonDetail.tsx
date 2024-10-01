@@ -7,12 +7,12 @@ import {
 } from "../constants/detailStyle";
 import { usePokemonInfo } from "../hooks/usePokemonInfo";
 
-interface IPokemonDetail {
+interface PokemonDetail {
   pokemonURL: string;
   onClick: any;
 }
 
-const PokemonDetail = ({ pokemonURL, onClick }: IPokemonDetail) => {
+const PokemonDetail = ({ pokemonURL, onClick }: PokemonDetail) => {
   const { pokemonInfo, loading, error } = usePokemonInfo(pokemonURL);
 
   if (loading)

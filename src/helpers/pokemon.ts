@@ -1,6 +1,4 @@
-import { Stat, Type, Species, Sprites, Ability } from "../context/types";
-
-const formatStats = (stats: Stat[]) => {
+const formatStats = (stats) => {
   const nameTypes = {
     hp: "HP",
     attack: "ATK",
@@ -10,27 +8,23 @@ const formatStats = (stats: Stat[]) => {
     speed: "SPD",
   };
 
-  const newStats = stats.map(({ stat, base_stat }) => {
-    const statName =
-      nameTypes[stat.name as keyof typeof nameTypes] || stat.name; // Fallback to stat.name if no match
-    return {
-      name: statName,
-      base_stat,
-    };
-  });
+  const newStats = stats.map(({ stat, base_stat }) => ({
+    name: nameTypes[stat.name],
+    base_stat,
+  }));
 
   return newStats;
 };
 
-const formatTypes = (types: Type[]) => types.map((type) => type.type.name);
+const formatTypes = (types) => types.map((type) => type.type.name);
 
-const formatAbilities = (abilities: Ability[]) =>
+const formatAbilities = (abilities) =>
   abilities.map((ability) => ability.ability.name);
 
-const getPokemonDescription = (pokemonSpecies: Species) =>
+const getPokemonDescription = (pokemonSpecies) =>
   pokemonSpecies.flavor_text_entries[1].flavor_text;
 
-const getPokemonImage = (sprites: Sprites) => {
+const getPokemonImage = (sprites) => {
   return (
     sprites.versions["generation-v"]["black-white"].animated.front_default ??
     sprites.versions["generation-v"]["black-white"].front_default
