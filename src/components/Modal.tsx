@@ -2,13 +2,13 @@ import { IconX } from "@tabler/icons-react";
 import PokemonInfo from "./PokemonInfo";
 import { typeColor } from "../constants/data";
 
-interface ModalProps {
+interface IModalProps {
   showModal: boolean;
   onClose: () => void;
   pokemon: any;
 }
 
-const Modal = ({ showModal, onClose, pokemon }: ModalProps) => {
+const Modal = ({ showModal, onClose, pokemon }: IModalProps) => {
   return (
     <section
       className={`fixed lg:hidden top-0 left-0 right-0 h-screen transition-all duration-500 ${

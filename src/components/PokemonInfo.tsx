@@ -1,6 +1,10 @@
 import { colorByStat, typeColor } from "../constants/data";
+import { IPokemonDetail } from "../context/types";
 
-const PokemonInfo = ({ pokemon }) => {
+interface IPokemonInfo {
+  pokemon: IPokemonDetail | null;
+}
+const PokemonInfo = ({ pokemon }: IPokemonInfo) => {
   return (
     <>
       <header className="absolute left-1/2 -translate-x-1/2 -translate-y-[92%] scale-[180%]">

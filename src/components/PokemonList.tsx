@@ -50,7 +50,7 @@ const PokemonList = ({ pokemons, pokemonName }: IPokemons) => {
       <ResponsivePagination
         className="flex gap-2 w-fit m-auto mt-5"
         pageItemClassName="bg-white p-2 font-semibold rounded-full shadow-lg w-[30px] aspect-square grid place-content-center hover:scale-110"
-        activeItemClassName="bg-[#E6BC2F] text-white"
+        activeItemClassName="bg-[#EFCE5E]"
         previousLabel={<IconChevronLeft stroke={4} color="#EE6B2F" />}
         nextLabel={<IconChevronRight stroke={4} color="#EE6B2F" />}
         current={currentPage}
