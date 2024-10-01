@@ -21,7 +21,7 @@ const typeColor: Record<string, string> = {
   water: "bg-[#4592c4]",
 };
 
-const colorByStat = {
+const colorByStat: Record<string, string> = {
   HP: "[&>div]:bg-red-500 bg-slate-100",
   ATK: "[&>div]:bg-orange-500 bg-slate-100",
   DEF: "[&>div]:bg-yellow-500 bg-slate-100",

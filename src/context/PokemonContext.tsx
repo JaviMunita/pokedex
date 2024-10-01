@@ -39,7 +39,7 @@ const PokemonProvider = ({ children }: PokemonProviderProps) => {
       description: getPokemonDescription(description),
       image: getPokemonImage(pokemonInfo.sprites),
     };
-
+    // @ts-ignore
     setPokemonDetail(formattedPokemonDetail);
     setShowPokemonDetail(true);
     setTimeout(() => {

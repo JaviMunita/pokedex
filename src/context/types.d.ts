@@ -3,38 +3,36 @@ export interface IPokemonDetail {
   name: string;
   height: number;
   weight: number;
-  types: string[];
-  stats: [{}];
-  abilities: string[];
+  types: [];
+  stats: Stat[];
+  abilities: [];
   description: string;
   image: string;
 }
 export interface Ability {
-  ability: Ability2;
+  ability: {
+    name: string;
+    url: string;
+  };
   slot: number;
 }
-export interface Ability2 {
-  name: string;
-  url: string;
-}
 export interface Stat {
-  base_stat: number;
-  stat: Stat2;
-}
-export interface Stat2 {
   name: string;
-  url: string;
+  base_stat: number;
+  stat: {
+    name: string;
+    url: string;
+  };
 }
 export interface Type {
   slot: number;
-  type: Type2;
-}
-export interface Type2 {
-  name: string;
-  url: string;
+  type: {
+    name: string;
+    url: string;
+  };
 }
 export interface Species {
-  flavor_text_entries: any;
+  flavor_text_entries: string;
   url: string;
   name: string;
 }
@@ -55,7 +53,7 @@ export interface IPokemonInfo {
 }
 export interface PokemonContextType {
   showPokemonDetail: boolean;
-  showPokemon: (pokemonInfo: any) => void; // You can create a more specific type
+  showPokemon: (IPokemonInfo) => void;
   closePokemonDetail: () => void;
   pokemonDetail: IPokemonDetail | null;
   isLoading: boolean;
