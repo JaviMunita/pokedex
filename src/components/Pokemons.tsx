@@ -8,7 +8,7 @@ function Pokemons() {
   const [allPokemons, setAllPokemons] = useState([]);
   const [pokemonName, setPokemonName] = useState("");
 
-  const handleChangePokemonName = (e) => {
+  const handleChangePokemonName = (e: { target: { value: string } }) => {
     setPokemonName(e.target.value.toLowerCase());
   };
 
