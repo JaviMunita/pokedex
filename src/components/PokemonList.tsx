@@ -4,7 +4,6 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 import PokemonDetail from "./PokemonDetail";
 import usePokemonContext from "../hooks/usePokemonContext";
-import { usePokemonInfo } from "../hooks/usePokemonInfo";
 
 interface IPokemon {
   url: string;

@@ -15,13 +15,14 @@ interface PokemonDetail {
 const PokemonDetail = ({ pokemonURL, onClick }: PokemonDetail) => {
   const { pokemonInfo, loading, error } = usePokemonInfo(pokemonURL);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error || !pokemonInfo) {
-    return <div>Error fetching Pokémon data.</div>;
-  }
+  if (loading)
+    return (
+      <div className="w-[60px] absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+        <img className="animate-spin" src="/pokeball-icon.png" alt="" />
+      </div>
+    );
+  if (error) return <div>Error fetching Pokémon data.</div>;
+  if (!pokemonInfo) return null;
 
   return (
     <article

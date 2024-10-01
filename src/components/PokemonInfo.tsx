@@ -1,4 +1,4 @@
-import { colorByStat, typeColor } from "../constants/colors";
+import { colorByStat, typeColor } from "../constants/data";
 
 const PokemonInfo = ({ pokemon }) => {
   return (
@@ -6,7 +6,7 @@ const PokemonInfo = ({ pokemon }) => {
       <header className="absolute left-1/2 -translate-x-1/2 -translate-y-[92%] scale-[180%]">
         <img className="pixelated" src={pokemon?.image} alt="" />
       </header>
-      <div className="overflow-y-auto px-4 pt-12 grid gap-2 content-start h-full hidden-scroll">
+      <div className="overflow-y-auto px-4 pt-12 grid gap-2 content-start h-full hidden-scroll text-center">
         <span className="text-slate-400 text-sm font-semibold">
           N° {pokemon?.id}
         </span>
