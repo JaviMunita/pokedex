@@ -1,23 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ResponsivePagination from "react-responsive-pagination";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+
 import PokemonDetail from "./PokemonDetail";
 import usePokemonContext from "../hooks/usePokemonContext";
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import { usePokemonInfo } from "../hooks/usePokemonInfo";
 
 interface IPokemon {
   url: string;
+  name: string;
 }
 
 interface IPokemons {
   pokemons: IPokemon[];
+  pokemonName: string;
 }
-const PokemonList = ({ pokemons }: IPokemons) => {
+
+const PokemonList = ({ pokemons, pokemonName }: IPokemons) => {
   const { showPokemon } = usePokemonContext();
   const [currentPage, setCurrentPage] = useState(1);
   const pokemonsPerPage = 20;
+
+  // Filter by pokemon name
+  const filteredPokemons = pokemons.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(pokemonName.toLowerCase())
+  );
+
+  // Reset to first page when the name filter is used
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [pokemonName]);
+
+  // Constants that calculate the range of Pokémon to display for the current page
   const lastIndex = currentPage * pokemonsPerPage;
   const firstIndex = lastIndex - pokemonsPerPage;
-  const pokemonCards = pokemons.slice(firstIndex, lastIndex);
+  const pokemonCards = filteredPokemons.slice(firstIndex, lastIndex);
 
   return (
     <>
@@ -38,7 +55,7 @@ const PokemonList = ({ pokemons }: IPokemons) => {
         previousLabel={<IconChevronLeft stroke={4} color="#EE6B2F" />}
         nextLabel={<IconChevronRight stroke={4} color="#EE6B2F" />}
         current={currentPage}
-        total={pokemonsPerPage}
+        total={Math.ceil(filteredPokemons.length / pokemonsPerPage)} // Calculate pages based on filtered results
         onPageChange={setCurrentPage}
       />
     </>

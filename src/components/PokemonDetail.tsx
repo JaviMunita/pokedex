@@ -1,4 +1,4 @@
-import { typeColor } from "../constants/colors";
+import { typeColor } from "../constants/data";
 import {
   pokemonCard,
   pokemonImage,

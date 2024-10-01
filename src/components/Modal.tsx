@@ -1,6 +1,6 @@
 import { IconX } from "@tabler/icons-react";
 import PokemonInfo from "./PokemonInfo";
-import { typeColor } from "../constants/colors";
+import { typeColor } from "../constants/data";
 
 interface ModalProps {
   showModal: boolean;

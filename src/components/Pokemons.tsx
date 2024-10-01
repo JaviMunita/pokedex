@@ -1,18 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { IconSearch } from "@tabler/icons-react";
+
 import PokemonList from "./PokemonList";
 
 function Pokemons() {
   const [allPokemons, setAllPokemons] = useState([]);
   const [pokemonName, setPokemonName] = useState("");
 
-  const pokemonsByName = allPokemons.filter((pokemon) =>
-    pokemon.name.includes(pokemonName)
-  );
-
-  const handleChangePokemonName = (e) =>
+  const handleChangePokemonName = (e) => {
     setPokemonName(e.target.value.toLowerCase());
+  };
 
   useEffect(() => {
     axios
@@ -37,7 +35,8 @@ function Pokemons() {
           </div>
         </div>
       </form>
-      <PokemonList pokemons={pokemonsByName} />
+
+      <PokemonList pokemons={allPokemons} pokemonName={pokemonName} />
     </section>
   );
 }

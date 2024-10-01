@@ -31,4 +31,26 @@ const colorByStat = {
   TOT: "[&>div]:bg-blue-500 bg-blue-300",
 };
 
-export { typeColor, colorByStat };
+const pokemonTypes = [
+  "All",
+  "Normal",
+  "Fire",
+  "Water",
+  "Electric",
+  "Grass",
+  "Ice",
+  "Fighting",
+  "Poison",
+  "Ground",
+  "Flying",
+  "Psychic",
+  "Bug",
+  "Rock",
+  "Ghost",
+  "Dragon",
+  "Dark",
+  "Steel",
+  "Fairy",
+];
+
+export { typeColor, colorByStat, pokemonTypes };
