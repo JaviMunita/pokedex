@@ -4,6 +4,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 import PokemonDetail from "./PokemonDetail";
 import usePokemonContext from "../hooks/usePokemonContext";
+import TypeFilter from "./TypeFilter";
 
 interface IPokemon {
   url: string;
@@ -18,25 +19,65 @@ interface IPokemons {
 const PokemonList = ({ pokemons, pokemonName }: IPokemons) => {
   const { showPokemon } = usePokemonContext();
   const [currentPage, setCurrentPage] = useState(1);
+  const [types, setTypes] = useState<string[]>([]);
+  const [selectedType, setSelectedType] = useState<string>("");
+  const [filteredByType, setFilteredByType] = useState<IPokemon[]>(pokemons);
   const pokemonsPerPage = 20;
 
-  // Filter by pokemon name
-  const filteredPokemons = pokemons.filter((pokemon) =>
+  useEffect(() => {
+    const fetchTypes = async () => {
+      const response = await fetch("https://pokeapi.co/api/v2/type/");
+      const data = await response.json();
+      setTypes(data.results.map((type: any) => type.name));
+    };
+
+    fetchTypes();
+  }, []);
+
+  // Filter pokemon by selected type
+  useEffect(() => {
+    if (selectedType) {
+      const fetchPokemonsByType = async () => {
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/type/${selectedType}`
+        );
+        const data = await response.json();
+        const typePokemons = data.pokemon.map((p: any) => ({
+          name: p.pokemon.name,
+          url: p.pokemon.url,
+        }));
+        setFilteredByType(typePokemons);
+      };
+
+      fetchPokemonsByType();
+    } else {
+      setFilteredByType(pokemons);
+    }
+  }, [selectedType, pokemons]);
+
+  // Filter by name
+  const filteredByName = filteredByType.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(pokemonName.toLowerCase())
   );
 
-  // Reset to first page when the name filter is used
+  // Reset to first page when the name filter or type filter is used
   useEffect(() => {
     setCurrentPage(1);
-  }, [pokemonName]);
+  }, [pokemonName, selectedType]);
 
-  // Constants that calculate the range of Pokémon to display for the current page
   const lastIndex = currentPage * pokemonsPerPage;
   const firstIndex = lastIndex - pokemonsPerPage;
-  const pokemonCards = filteredPokemons.slice(firstIndex, lastIndex);
+  const pokemonCards = filteredByName.slice(firstIndex, lastIndex);
 
   return (
     <>
+      {/* Type filter select */}
+      <TypeFilter
+        selectedType={selectedType}
+        onChange={(e) => setSelectedType(e.target.value)}
+        types={types}
+      />
+
       <section className="pt-14 grid grid-cols-[repeat(auto-fit,_minmax(180px,_1fr))] gap-4 gap-y-14">
         {pokemonCards.map((pokemon) => (
           <PokemonDetail
@@ -54,7 +95,7 @@ const PokemonList = ({ pokemons, pokemonName }: IPokemons) => {
         previousLabel={<IconChevronLeft stroke={4} color="#EE6B2F" />}
         nextLabel={<IconChevronRight stroke={4} color="#EE6B2F" />}
         current={currentPage}
-        total={Math.ceil(filteredPokemons.length / pokemonsPerPage)} // Calculate pages based on filtered results
+        total={Math.ceil(filteredByName.length / pokemonsPerPage)}
         onPageChange={setCurrentPage}
       />
     </>
