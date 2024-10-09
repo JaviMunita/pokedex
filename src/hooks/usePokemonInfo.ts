@@ -35,8 +35,7 @@ export const usePokemonInfo = (pokemonURL: string) => {
       .catch((err) => {
         setError(err);
         setLoading(false);
-      })
-      .finally(() => setLoading(false));
+      });
   }, [pokemonURL]);
 
   return { pokemonInfo, loading, error };

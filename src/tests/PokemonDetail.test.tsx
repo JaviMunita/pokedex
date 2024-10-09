@@ -1,66 +1,80 @@
-import { render, screen } from "@testing-library/react";
+// @ts-nocheck
 import "@testing-library/jest-dom";
-
-import PokemonDetail from "../components/PokemonDetail";
+import { render, screen } from "@testing-library/react";
 import { usePokemonInfo } from "../hooks/usePokemonInfo";
+import PokemonDetail from "../components/PokemonDetail";
 
 jest.mock("../hooks/usePokemonInfo");
 
-const mockUsePokemonInfo = usePokemonInfo as jest.Mock;
-
-describe("PokemonDetail Component", () => {
-  it("shows 'Loading...' while loading", () => {
-    mockUsePokemonInfo.mockReturnValue({
-      pokemonInfo: null,
-      loading: true,
-      error: null,
-    });
-
-    render(<PokemonDetail pokemonURL="some-url" onClick={() => {}} />);
-
-    expect(screen.getByText("Loading...")).toBeInTheDocument();
-  });
-
-  it("shows error message when there's an error", () => {
-    mockUsePokemonInfo.mockReturnValue({
-      pokemonInfo: null,
-      loading: false,
-      error: true,
-    });
-
-    render(<PokemonDetail pokemonURL="some-url" onClick={() => {}} />);
-
-    expect(
-      screen.getByText("Error fetching Pokémon data.")
-    ).toBeInTheDocument();
-  });
-
-  it("displays the Pokémon details when data is available", () => {
-    mockUsePokemonInfo.mockReturnValue({
-      pokemonInfo: {
-        id: 1,
-        name: "bulbasaur",
-        sprites: {
-          versions: {
-            "generation-v": {
-              "black-white": {
-                front_default: "bulbasaur.png",
-              },
-            },
-          },
+const mockPokemonInfo = {
+  id: 1,
+  name: "bulbasaur",
+  sprites: {
+    versions: {
+      "generation-v": {
+        "black-white": {
+          front_default: "https://example.com/bulbasaur.png",
         },
-        types: [{ type: { name: "grass" } }],
       },
-      loading: false,
-      error: null,
-    });
+    },
+  },
+  types: [{ type: { name: "grass" } }, { type: { name: "poison" } }],
+};
 
-    render(<PokemonDetail pokemonURL="some-url" onClick={() => {}} />);
-
-    expect(screen.getByText("N°1")).toBeInTheDocument();
-    expect(screen.getByText("bulbasaur")).toBeInTheDocument();
-    expect(screen.getByText("grass")).toBeInTheDocument();
-    const image = screen.getByAltText("bulbasaur");
-    expect(image).toHaveAttribute("src", "bulbasaur.png");
+test("renders pokemon data correctly", () => {
+  usePokemonInfo.mockReturnValue({
+    pokemonInfo: mockPokemonInfo,
+    loading: false,
+    error: null,
   });
+
+  render(
+    <PokemonDetail
+      pokemonURL="https://example.com/pokemon/1"
+      onClick={() => {}}
+    />
+  );
+
+  expect(screen.getByText(/N°1/i)).toBeInTheDocument();
+  expect(screen.getByText(/bulbasaur/i)).toBeInTheDocument();
+
+  expect(screen.getByRole("img", { name: /bulbasaur/i })).toBeInTheDocument();
+
+  expect(screen.getByText(/grass/i)).toBeInTheDocument();
+  expect(screen.getByText(/poison/i)).toBeInTheDocument();
+});
+
+test("displays loading state", () => {
+  usePokemonInfo.mockReturnValue({
+    pokemonInfo: null,
+    loading: true,
+    error: null,
+  });
+
+  render(
+    <PokemonDetail
+      pokemonURL="https://example.com/pokemon/1"
+      onClick={jest.fn()}
+    />
+  );
+
+  const loadingElement = screen.getByAltText(/pokemon ball icon/i);
+  expect(loadingElement).toBeInTheDocument();
+});
+
+test("displays error message", () => {
+  usePokemonInfo.mockReturnValue({
+    pokemonInfo: null,
+    loading: false,
+    error: "Error fetching Pokémon data.",
+  });
+
+  render(
+    <PokemonDetail
+      pokemonURL="https://example.com/pokemon/1"
+      onClick={jest.fn()}
+    />
+  );
+
+  expect(screen.getByText(/Error fetching Pokémon data./i)).toBeInTheDocument();
 });

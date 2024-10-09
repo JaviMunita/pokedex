@@ -18,7 +18,11 @@ const PokemonDetail = ({ pokemonURL, onClick }: IPokemonDetail) => {
   if (loading)
     return (
       <div className="w-[60px] absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
-        <img className="animate-spin" src="/pokeball-icon.png" alt="" />
+        <img
+          className="animate-spin"
+          src="/pokeball-icon.png"
+          alt="pokemon ball icon"
+        />
       </div>
     );
   if (error) return <div>Error fetching Pokémon data.</div>;
