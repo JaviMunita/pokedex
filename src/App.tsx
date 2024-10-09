@@ -8,8 +8,8 @@ function App() {
     usePokemonContext();
 
   return (
-    <section className="bg-[#EFEFEF] h-screen font-outfit overflow-y-auto">
-      <main className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_350px] overflow-x-hidden">
+    <section className="bg-[#EFEFEF] h-screen font-outfit overflow-y-auto overflow-x-hidden">
+      <main className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_350px]">
         <Pokemons />
         <Drawer pokemon={pokemonDetail} isLoading={isLoading} />
         <Modal

@@ -12,7 +12,7 @@ const formatStats = (stats: Stat[]) => {
 
   const newStats = stats.map(({ stat, base_stat }) => {
     const statName =
-      nameTypes[stat.name as keyof typeof nameTypes] || stat.name; // Fallback to stat.name if no match
+      nameTypes[stat.name as keyof typeof nameTypes] || stat.name;
     return {
       name: statName,
       base_stat,

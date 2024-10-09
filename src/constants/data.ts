@@ -31,26 +31,4 @@ const colorByStat: Record<string, string> = {
   TOT: "[&>div]:bg-blue-500 bg-blue-300",
 };
 
-const pokemonTypes = [
-  "All",
-  "Normal",
-  "Fire",
-  "Water",
-  "Electric",
-  "Grass",
-  "Ice",
-  "Fighting",
-  "Poison",
-  "Ground",
-  "Flying",
-  "Psychic",
-  "Bug",
-  "Rock",
-  "Ghost",
-  "Dragon",
-  "Dark",
-  "Steel",
-  "Fairy",
-];
-
-export { typeColor, colorByStat, pokemonTypes };
+export { typeColor, colorByStat };

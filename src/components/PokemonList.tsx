@@ -24,6 +24,7 @@ const PokemonList = ({ pokemons, pokemonName }: IPokemons) => {
   const [filteredByType, setFilteredByType] = useState<IPokemon[]>(pokemons);
   const pokemonsPerPage = 20;
 
+  // Fetch types for select options
   useEffect(() => {
     const fetchTypes = async () => {
       const response = await fetch("https://pokeapi.co/api/v2/type/");
@@ -37,11 +38,13 @@ const PokemonList = ({ pokemons, pokemonName }: IPokemons) => {
   // Filter pokemon by selected type
   useEffect(() => {
     if (selectedType) {
+      // Gets the data of the selected type pokemons
       const fetchPokemonsByType = async () => {
         const response = await fetch(
           `https://pokeapi.co/api/v2/type/${selectedType}`
         );
         const data = await response.json();
+        // Stores name and url in a new array created from the data
         const typePokemons = data.pokemon.map((p: any) => ({
           name: p.pokemon.name,
           url: p.pokemon.url,
@@ -51,6 +54,7 @@ const PokemonList = ({ pokemons, pokemonName }: IPokemons) => {
 
       fetchPokemonsByType();
     } else {
+      // If no type is selected, it resets to the full list
       setFilteredByType(pokemons);
     }
   }, [selectedType, pokemons]);
@@ -71,7 +75,6 @@ const PokemonList = ({ pokemons, pokemonName }: IPokemons) => {
 
   return (
     <>
-      {/* Type filter select */}
       <TypeFilter
         selectedType={selectedType}
         onChange={(e) => setSelectedType(e.target.value)}
